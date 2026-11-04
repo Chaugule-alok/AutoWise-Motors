@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AutoWise – Buy Vehicles</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <!-- HEADER (same as index) -->
+    <header class="header">
+        <div class="logo"><i class="fas fa-car"></i> Auto<span>Wise</span></div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="buy.html" class="active">Buy</a>
+            <a href="sell.html">Sell</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact Us</a>
+        </nav>
+        
+        <div class="header-actions">
+            <a href="login.html" class="btn-outline"><i class="fas fa-user"></i> Login</a>
+            <a href="wishlist.html" class="wishlist-link"><i class="fas fa-heart"></i><span class="badge" id="wishlistBadge">0</span></a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="filter-category-row">
+            <button class="filter-toggle" onclick="toggleFilter()"><i class="fas fa-sliders-h"></i> Filters</button>
+            <div class="category-pills" id="categoryPills">
+                <span class="pill active" data-cat="all" onclick="setCategory('all')"><i class="fas fa-th-large"></i> All</span>
+                <span class="pill" data-cat="car" onclick="setCategory('car')"><i class="fas fa-car"></i> Cars</span>
+                <span class="pill" data-cat="bike" onclick="setCategory('bike')"><i class="fas fa-motorcycle"></i> Bikes</span>
+                <span class="pill" data-cat="truck" onclick="setCategory('truck')"><i class="fas fa-truck"></i> Trucks</span>
+            </div>
+        </div>
+
+        <!-- Filter Panel -->
+        <div class="filter-panel" id="filterPanel">
+            <div class="filter-row">
+                <div class="form-group"><label>Text Search</label><input type="text" id="filterText" placeholder="Brand, model, city..." /></div>
+                <div class="form-group"><label>Vehicle Type</label><select id="filterType"><option value="all">All</option><option value="car">Cars</option><option value="bike">Bikes</option><option value="truck">Trucks</option></select></div>
+                <div class="form-group"><label>Fuel Type</label><select id="filterFuel"><option value="all">All</option><option value="Petrol">Petrol</option><option value="Diesel">Diesel</option><option value="EV">EV</option><option value="Hybrid">Hybrid</option></select></div>
+            </div>
+            <div class="filter-row">
+                <div class="form-group"><label>KM (min)</label><input type="number" id="filterKmMin" placeholder="0" /></div>
+                <div class="form-group"><label>KM (max)</label><input type="number" id="filterKmMax" placeholder="200000" /></div>
+                <div class="form-group"><label>Year (min)</label><input type="number" id="filterYearMin" placeholder="2000" /></div>
+                <div class="form-group"><label>Year (max)</label><input type="number" id="filterYearMax" placeholder="2026" /></div>
+            </div>
+            <div class="filter-row">
+                <div class="form-group"><label>Price (min)</label><input type="number" id="filterPriceMin" placeholder="0" /></div>
+                <div class="form-group"><label>Price (max)</label><input type="number" id="filterPriceMax" placeholder="10000000" /></div>
+            </div>
+            <div class="filter-actions">
+                <button class="btn-filter apply" onclick="applyFilters()">Apply Filters</button>
+                <button class="btn-filter reset" onclick="resetFilters()">Reset</button>
+            </div>
+        </div>
+
+        
+
+        <!-- Best car section -->
+        <section class="manual-vehicles">
+            <div class="section-header">
+                <h2><i class="fas fa-medal" style="color:var(--primary);"></i> Best Car With Best Price</h2>
+                <a href="buy.html" class="view-all">Check latest deal <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="vehicle-grid">
+                <div class="vehicle-card" style="grid-column: 1 / -1;">
+                    <div class="img-wrap" style="min-height:280px;">
+                        <img id="bestDealImage" alt="Honda City" loading="lazy" />
+                        <span class="price-tag">₹7,20,000</span>
+                        <span class="price-mismatch green">Best Value</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>Honda City</h3>
+                        <div class="sub">2019 · Chennai · 2nd owner</div>
+                        <div class="specs">
+                            <span><i class="fas fa-tachometer-alt"></i> 45,000 km</span>
+                            <span><i class="fas fa-gas-pump"></i> Petrol</span>
+                            <span><i class="fas fa-cog"></i> CVT</span>
+                        </div>
+                        <p style="color:var(--text-muted);margin:12px 0;">A top-rated car with the strongest price-performance score. Clean service history, low ownership cost, and ready to drive.</p>
+                        <div class="features">
+                            <span class="tag good"><i class="fas fa-check-circle"></i> Low mileage</span>
+                            <span class="tag good"><i class="fas fa-check-circle"></i> Verified condition</span>
+                            <span class="tag good"><i class="fas fa-check-circle"></i> Best price</span>
+                        </div>
+                        <button class="btn-detail" onclick="window.location.href='detail.html?id=c5'"><i class="fas fa-arrow-right"></i> View Offer</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cars section -->
+        <section id="carsSection" class="manual-vehicles">
+            <div class="section-header">
+                <h2><i class="fas fa-car" style="color:var(--primary);"></i> Cars <span id="carCount" style="font-size:0.9rem;color:var(--text-muted);"></span></h2>
+            </div>
+            <div class="vehicle-grid" id="carGrid"></div>
+            <div style="text-align:center;margin-top:16px;">
+                <button id="toggleCarsBtn" class="btn-detail toggle-action-btn" type="button">
+                    <i class="fas fa-arrow-down"></i> See more
+                </button>
+            </div>
+        </section>
+
+        <!-- Bikes section -->
+        <section id="bikesSection" class="manual-vehicles">
+            <div class="section-header">
+                <h2><i class="fas fa-motorcycle" style="color:var(--primary);"></i> Bikes <span id="bikeCount" style="font-size:0.9rem;color:var(--text-muted);"></span></h2>
+            </div>
+            <div class="vehicle-grid" id="bikeGrid"></div>
+            <div style="text-align:center;margin-top:16px;">
+                <button id="toggleBikesBtn" class="btn-detail toggle-action-btn" type="button">
+                    <i class="fas fa-arrow-down"></i> See more
+                </button>
+            </div>
+        </section>
+
+        <!-- Trucks section -->
+        <section id="trucksSection" class="manual-vehicles">
+            <div class="section-header">
+                <h2><i class="fas fa-truck" style="color:var(--primary);"></i> Trucks <span id="truckCount" style="font-size:0.9rem;color:var(--text-muted);"></span></h2>
+            </div>
+            <div class="vehicle-grid" id="truckGrid"></div>
+            <div style="text-align:center;margin-top:16px;">
+                <button id="toggleTrucksBtn" class="btn-detail toggle-action-btn" type="button">
+                    <i class="fas fa-arrow-down"></i> See more
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- MODAL -->
+    <div class="modal-overlay" id="detailModal">...</div>
+    <footer class="footer">
+        <div class="bottom">© 2026 AutoWise. All rights reserved. Built with <i class="fas fa-heart" style="color:var(--secondary);"></i> for India.</div>
+    </footer>
+
+
+    <script src="js/data.js"></script>
+    <script src="js/images.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script src="js/buy.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+{
+  "vehicle": {
+    "make": "kai",
+    "model": "seltos",
+    "variant": "x3",
+    "year": 2022,
+    "km": 1250000,
+    "transmission": "Automatic",
+    "fuel": "Diesel",
+    "owners": 1,
+    "services": 13,
+    "color": "white",
+    "condition": "Good",
+    "city": "Sangli",
+    "listed_price": 0.0
+  },
+  "market": {
+    "estimated_price": 501623,
+    "range_low": 348400,
+    "range_high": 654845,
+    "reliability": 59.9,
+    "model_name": "CatBoost Regressor \u2014 CarDekho Indian used-car dataset",
+    "source": "trained_ml",
+    "damage_adjustment_pct": 0,
+    "coverage_note": "This vehicle year is newer than the training data; refresh the dataset for stronger current-market accuracy.",
+    "explanation": [
+      {
+        "feature": "High mileage",
+        "impact": "reduces value",
+        "direction": "negative"
+      },
+      {
+        "feature": "1st owner",
+        "impact": "supports resale",
+        "direction": "positive"
+      },
+      {
+        "feature": "Automatic transmission",
+        "impact": "can support demand",
+        "direction": "positive"
+      },
+      {
+        "feature": "Service history",
+        "impact": "small positive adjustment",
+        "direction": "positive"
+      }
+    ]
+  },
+  "vision": {
+    "model_ready": false,
+    "message": "Custom car-damage model not installed. Upload a trained car_damage.pt to enable real scratch/dent detection.",
+    "findings": [],
+    "repair_estimate": 0,
+    "price_adjustment_pct": 0,
+    "frames_analyzed": 0,
+    "media_count": 6
+  },
+  "mismatch": null,
+  "currency": "INR",
+  "note": "AI valuation is an estimate. Accuracy depends on the quality and coverage of the trained Indian-market dataset and the trained damage model."
+}

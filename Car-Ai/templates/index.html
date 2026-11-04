@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AutoWise — Outstanding Indian Vehicle AI</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<header class="top"><div><div class="brand">🚗 AutoWise</div><div class="tag">Indian Vehicle Market Intelligence</div></div><span class="pill">₹ INR • Hybrid AI</span></header>
+<main class="wrap">
+<section class="hero"><h1>Find a <span>realistic market price.</span></h1><p>AutoWise combines vehicle details, a trained Indian-market model, a transparent depreciation formula, real comparable listings, and verified photo/video damage findings.</p></section>
+<form id="form"><div class="grid">
+<section class="card"><h2>1. Vehicle details</h2><div class="fields">
+<label>Make<input name="make" required placeholder="Kia"></label>
+<label>Model<input name="model" required placeholder="Seltos"></label>
+<label>Variant<input name="variant" required placeholder="HTX / GTX+ / X-Line"></label>
+<label>Year<input name="year" type="number" min="1990" max="2026" placeholder="2022" required></label>
+<label>Kilometers<input name="km" type="number" min="0" placeholder="52000" required></label>
+<label>Owners<select name="owners"  ><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></label>
+<label>Transmission<select name="transmission"><option>Automatic</option><option selected>Manual</option></select></label>
+<label>Fuel<select name="fuel"><option>Petrol</option><option>Diesel</option><option>CNG</option><option>EV</option><option>Hybrid</option></select></label>
+<label>Services completed<input name="services" type="number" min="0" placeholder="5"></label>
+<label>Color<input name="color" placeholder="White"></label>
+<label>Condition<select name="condition"><option>Excellent</option><option selected>Good</option><option>Fair</option><option>Poor</option></select></label>
+<label>City<input name="city" placeholder="mumbai"></label>
+<label>Original/ex-showroom price (₹)<input name="original_price_inr" type="number" min="0" placeholder="e.g. 1500000"></label>
+<label class="full">Listed/asking price (₹)<input name="listed_price" type="number" min="0" placeholder="Optional"></label>
+</div><div class="notice">⚠️ Enter kilometres carefully. For example, <b>125000</b> means 1.25 lakh km; <b>1250000</b> means 12.5 lakh km and will be blocked as a likely input error.</div></section>
+<section class="card"><h2>2. Photos, video & camera</h2><p class="muted">Upload up to 20 clear images and/or a walk-around video. More angles improve the inspection.</p>
+<div class="media-actions"><label class="btn">📷 Add photos<input id="photos" type="file" accept="image/*" multiple hidden></label><label class="btn">🎥 Add video<input id="video" type="file" accept="video/*" hidden></label><button type="button" class="btn" id="camera">📸 Camera</button></div>
+<video id="cameraView" class="camera" autoplay playsinline hidden></video><div id="cameraActions" hidden><button type="button" class="btn" id="snap">Take photo</button><button type="button" class="btn secondary" id="stop">Stop camera</button></div><div id="previews" class="previews"></div>
+<p class="muted small">Recommended: front, rear, both sides, wheels/tyres, interior, dashboard/odometer, engine bay and any suspected damage.</p>
+<button class="primary" type="submit">Analyze with AutoWise AI →</button></section>
+</div></form>
+<section id="results" class="results" hidden><div class="result-head"><div><div class="eyebrow">AI market valuation</div><div class="big" id="price">₹—</div><div id="range" class="range">—</div></div><div class="reliability"><b id="rel">—</b><span>confidence / coverage</span></div></div>
+<div class="cards3"><div class="mini"><span>Valuation engine</span><b id="modelName">—</b></div><div class="mini"><span>Damage repair estimate</span><b id="repair">₹—</b></div><div class="mini"><span>Damage adjustment</span><b id="adjustment">—</b></div></div>
+<div id="mismatch" class="notice" hidden></div>
+<div class="report-grid"><section class="card"><h2>Damage & inspection report</h2><p id="visionMsg" class="muted"></p><div id="findings"></div></section><section class="card"><h2>Why this price?</h2><div id="explain"></div></section></div>
+<section class="card"><h2>Professional-style report</h2><p id="summary"></p><div id="videoPrompt" class="notice" hidden></div><div class="warning">AutoWise provides an estimated market range. A physical inspection and document verification are still required before purchase or sale.</div></section>
+</section></main><script src="{{ url_for('static', filename='js/app.js') }}"></script></body></html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AutoWise – Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <header class="header">
+        <div class="logo"><i class="fas fa-car"></i> Auto<span>Wise</span></div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="buy.html">Buy</a>
+            <a href="sell.html">Sell</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact Us</a>
+        </nav>
+        <div class="header-actions">
+            <a href="login.html" class="btn-outline active"><i class="fas fa-user"></i> Login</a>
+            <a href="wishlist.html" class="wishlist-link"><i class="fas fa-heart"></i><span class="badge" id="wishlistBadge">0</span></a>
+            
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="form-section auth-section">
+            <div class="auth-card signin">
+                <div class="auth-intro">
+                    <span class="eyebrow">Welcome to AutoWise</span>
+                    <h1>Unlock AI-powered car buying and selling</h1>
+                    <p>Sign in to use AutoWise’s intelligent tools: fair price alerts, damage insights, resale forecasting, and verified vehicle recommendations across the marketplace.</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check-circle"></i> Price Mismatch Detector for fair offers</li>
+                        <li><i class="fas fa-check-circle"></i> AI damage and condition analysis</li>
+                        <li><i class="fas fa-check-circle"></i> Future value prediction for every vehicle</li>
+                        <li><i class="fas fa-check-circle"></i> Verified listings with QR-backed trust</li>
+                        <li><i class="fas fa-check-circle"></i> Wishlist and compare your favorite cars</li>
+                        <li><i class="fas fa-check-circle"></i> Personalized AutoWise AI recommendations</li>
+                    </ul>
+                    <div class="feature-grid">
+                        <div class="feature-box">
+                            <i class="fas fa-traffic-light"></i>
+                            <div>
+                                <strong>Price Mismatch Detector</strong>
+                                <p>See green for fair, yellow for over, and red for suspicious pricing.</p>
+                            </div>
+                        </div>
+                        <div class="feature-box">
+                            <i class="fas fa-search-plus"></i>
+                            <div>
+                                <strong>AI Damage Scan</strong>
+                                <p>Detect dents, scratches, and condition issues with smart insight.</p>
+                            </div>
+                        </div>
+                        <div class="feature-box">
+                            <i class="fas fa-chart-line"></i>
+                            <div>
+                                <strong>Future Value Predictor</strong>
+                                <p>Forecast resale value so you buy or sell with confidence.</p>
+                            </div>
+                        </div>
+                        <div class="feature-box">
+                            <i class="fas fa-brain"></i>
+                            <div>
+                                <strong>AutoWise AI</strong>
+                                <p>Get tailored vehicle recommendations based on budget and needs.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="auth-panel">
+                    <div class="auth-tabs" role="tablist">
+                        <button type="button" class="tab-btn active" data-tab="signin" role="tab" aria-selected="true">Sign In</button>
+                        <button type="button" class="tab-btn" data-tab="signup" role="tab" aria-selected="false">Sign Up</button>
+                    </div>
+                    <div class="auth-form-container">
+                        <div id="authMessage" class="message-box" aria-live="polite"></div>
+                        <form id="signinForm" class="auth-form active">
+                            <div class="form-group"><label for="signinEmail">Email or Username</label><input type="text" id="signinEmail" placeholder="Enter your email or username" required /></div>
+                            <div class="form-group"><label for="signinPassword">Password</label><input type="password" id="signinPassword" placeholder="Enter your password" required /></div>
+                            <div class="form-actions">
+                                <label class="remember"><input type="checkbox" id="rememberMe" /> Remember me</label>
+                                <a href="#" class="small-link">Forgot password?</a>
+                            </div>
+                            <button type="submit" class="btn-submit">Sign In</button>
+                        </form>
+                        <form id="signupForm" class="auth-form">
+                            <div class="form-group"><label for="signupName">Full Name</label><input type="text" id="signupName" placeholder="Enter your full name" required /></div>
+                            <div class="form-group"><label for="signupEmail">Email</label><input type="email" id="signupEmail" placeholder="Enter your email address" required /></div>
+                        <div class="form-group"><label for="signupUsername">Username</label><input type="text" id="signupUsername" placeholder="Choose a username" required /></div>
+                            <div class="form-group"><label for="signupPassword">Password</label><input type="password" id="signupPassword" placeholder="Create a strong password (min 6 characters)" required /></div>
+                            
+                            <button type="submit" class="btn-submit">Create Account</button>
+                        </form>
+                    </div>
+                    <div class="divider">or continue with</div>
+                    <div class="social-login social-row">
+                        <button type="button" class="social-btn google" onclick="socialLogin('Google')"><i class="fab fa-google"></i> Continue with Google</button>
+                        <button type="button" class="social-btn facebook" onclick="socialLogin('Facebook')"><i class="fab fa-facebook-f"></i> Continue with Facebook</button>
+                    </div>
+                    <p class="helper-text">By continuing, you agree to AutoWise terms and privacy policy.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="modal-overlay" id="detailModal">...</div>
+
+    <footer class="footer">
+    <div class="bottom">© 2026 AutoWise. All rights reserved. Built with <i class="fas fa-heart" style="color:var(--secondary);"></i> for India.</div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/images.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AutoWise – India's Smartest Auto Marketplace</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!-- Global Styles -->
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="logo"><i class="fas fa-car"></i> Auto<span>Wise</span></div>
+        <nav class="nav-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="buy.html">Buy</a>
+            <a href="sell.html">Sell</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact Us</a>
+        </nav>
+        <div class="header-actions">
+            <a href="login.html" class="btn-outline"><i class="fas fa-user"></i> Login</a>
+            <a href="wishlist.html" class="wishlist-link" title="Wishlist">
+                <i class="fas fa-heart"></i>
+                <span class="badge" id="wishlistBadge">0</span>
+            </a>
+            
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero-banner">
+        <h1><i class="fas fa-car"></i> India's Smartest Auto Marketplace</h1>
+        <p>Buy, sell, and value cars with AI-powered insights — damage detection, price prediction</p>
+        <div class="search-box">
+            <input type="text" placeholder="Search cars, bikes, trucks..." id="globalSearch" onkeyup="filterCards()" />
+            <button onclick="filterCards()"><i class="fas fa-search"></i> Search</button>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- FEATURES GRID -->
+        <section id="features">
+            <div class="features-grid">
+
+                <div class="feature-card">
+                    <div class="icon"><i class="fas fa-traffic-light"></i></div>
+                    <h3>🚦 Price Mismatch Detector</h3>
+                    <p>Green = fair price · Yellow = overpriced     · Red = fraud / extreme.</p>
+                    <span class="demo-badge"><span style="color:var(--green);">●</span> Fair · <span style="color:var(--yellow);">●</span> Over · <span style="color:var(--red);">●</span> Fraud</span>
+                </div>
+
+                <a href="Car-Ai\index.html">
+                <div class="feature-card">
+                    <div class="icon"><i class="fas fa-search-plus"></i></div>
+                    <h3>🔍 Damage Detector</h3>
+                    <p>AI scans for dents, scratches, cracks &amp; severity — just upload a photo.</p>
+                    <span class="demo-badge"><i class="fas fa-camera"></i> Upload &amp; Scan</span>
+                </div>
+                </a>
+
+                
+                <div class="feature-card">
+                    <a href="Car-Ai\index.html">
+                    <div class="icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>📈 Future Value Predictor</h3>
+                    <p>See what your car will be worth in 3 years — data-driven depreciation.</p>
+                    <span class="demo-badge">₹4,72,000 → ₹3,41,000</span>
+                </a>
+                </div>
+                <!-- <div class="feature-card">
+                    <div class="icon"><i class="fas fa-qrcode"></i></div>
+                    <h3>📱 QR Car Passport</h3>
+                    <p>Every vehicle gets a unique QR. Scan to verify price, damage, and history.</p>
+                    <span class="demo-badge"><i class="fas fa-qrcode"></i> AutoWise‑P7X9</span>
+                </div> -->
+                
+                
+                <div class="feature-card">
+                    <a href="Car-Ai\index.html">
+                    <div class="icon"><i class="fas fa-calculator"></i></div>
+                    <h3>📊 Market Price Estimator</h3>
+                    <p>Uses year, KM, services, accidents — matches real market trends.</p>
+                    <span class="demo-badge"><i class="fas fa-arrow-right"></i> Try below</span>
+                    </a>
+                </div>
+                <div class="feature-card">
+                    <div class="icon"><i class="fas fa-brain"></i></div>
+                    <h3>🧠 AutoWise AI</h3>
+                    <p>Recommends the best car for your lifestyle — mileage, performance, budget.</p>
+                    <span class="demo-badge"><i class="fas fa-robot"></i> Ask AI</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURED VEHICLES -->
+        <section class="manual-vehicles">
+            <div class="section-header">
+                <h2><i class="fas fa-star" style="color:var(--primary);"></i> Popular Picks</h2>
+                <a href="buy.html" class="view-all">Browse all vehicles <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="vehicle-grid" id="popularGrid"></div>
+        </section>
+        <section class="manual-vehicles">
+            <div class="section-header">
+                <h2><i class="fas fa-plus-circle" style="color:var(--primary);"></i> More Vehicles</h2>
+                <a href="buy.html" class="view-all">See more listings <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="vehicle-grid" id="moreGrid"></div>
+        </section>
+        <div class="section-header">
+            <h2><i class="fas fa-car" style="color:var(--primary);"></i> Featured Vehicles</h2>
+            <a href="buy.html" class="view-all">View all <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="vehicle-grid" id="vehicleGrid"></div>
+        <div style="text-align:center;margin-top:16px;">
+            <button id="toggleFeaturedBtn" class="btn-detail toggle-action-btn" type="button">
+                <i class="fas fa-arrow-down"></i> See more
+            </button>
+        </div>
+
+        <!-- PRICE ESTIMATOR -->
+        <section id="estimator">
+            <div class="estimator-tool">
+                <div class="estimator-header">
+                    <h3><i class="fas fa-calculator" style="color:var(--primary);"></i> mini AutoWise Market Price Estimator</h3>
+                    <button class="estimator-action" onclick="openCarAi()">
+                        <i class="fas fa-upload"></i> Upload More Details to Get Best Price
+                    </button>
+                </div>
+                <p class="sub">Enter your vehicle details to get a real‑time market estimate.</p>
+                <div class="estimator-row">
+                    <div><label>Year</label><input type="number" id="estYear" value="" placeholder="2019" min="1985" max="2026" /></div>
+                    <div><label>KM Driven</label><input type="number" id="estKm" value="" placeholder="10,000" min="0" step="100000" /></div>
+                    <div><label>Services</label><input type="number" id="estServices" value="" placeholder="4" min="0" max="20" /></div>
+                    <div><label>Accidents</label><input type="number" id="estAccidents" value="" placeholder="1" min="0" max="10" /></div>
+                </div>
+                <button onclick="estimatePrice()" style="padding:12px 36px;border-radius:40px;background:var(--primary);color:#fff;border:none;font-weight:700;font-size:16px;cursor:pointer;transition:var(--transition);">
+                    <i class="fas fa-chart-simple"></i> Check Estimate Market Price
+                </button>
+                <button onclick="window.location.href='sell.html'" style="padding:12px 36px;border-radius:40px;background:var(--primary);color:#fff;border:none;font-weight:700;font-size:16px;cursor:pointer;margin-left:12px;transition:var(--transition);">
+                    <i class="fas fa-arrow-right"></i> Sell Your Car With Your Estimate
+                </button>
+                
+                <div class="estimator-result">
+                    <span class="big-price" id="estPriceDisplay">₹X,XX,XXX</span>
+                    <span class="detail"><strong>Market Range:</strong> <span id="estRange">₹X,XX,XXX – ₹X,XX,XXX</span></span>
+                    <span class="detail"><strong>Condition Score:</strong> <span id="estScore"> XX / 100</span></span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="inner">
+            <div><h4><i class="fas fa-car" style="color:var(--secondary);"></i> AutoWise</h4><p>Buy, sell, and value cars with AI-powered insights — <br> "damage detection, price prediction".</p></div>
+            <div><h4>Quick Links</h4><li><a href="buy.html">Browse Cars</a></li><li><a href="buy.html">Browse Bikes</a></li><li><a href="buy.html">Browse Trucks</a></li><li><a href="sell.html">Sell Your Vehicle</a></li><li><a href="wishlist.html">Wishlist</a></li></div>
+            <div><h4>Features</h4><li><a href="#features">Damage Detector</a></li><li><a href="#features">Future Value</a></li><li><a href="#features">QR Passport</a></li><li><a href="#features">Price Mismatch</a></li></div>
+            
+        </div>
+        <div class="bottom">© 2026 AutoWise. All rights reserved. Built with <i class="fas fa-heart" style="color:var(--secondary);"></i> for India.</div>
+    </footer>
+
+    <!-- MODAL -->
+    <div class="modal-overlay" id="detailModal">
+        <div class="modal">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <h2 id="modalTitle">Vehicle Details</h2>
+            <p class="modal-sub" id="modalSub">Complete information with AI insights.</p>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="js/data.js"></script>
+    <script src="js/images.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AutoWise – Sell Your Vehicle</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="logo"><i class="fas fa-car"></i> Auto<span>Wise</span></div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="buy.html">Buy</a>
+            <a href="sell.html" class="active">Sell</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact Us</a>
+        </nav>
+        <div class="header-actions">
+            <a href="login.html" class="btn-outline"><i class="fas fa-user"></i> Login</a>
+            <a href="wishlist.html" class="wishlist-link"><i class="fas fa-heart"></i><span class="badge" id="wishlistBadge">0</span></a>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="form-section">
+            <h1>Sell Your Vehicle</h1>
+            <p>Fill in the details below and our team will contact you within 24 hours.</p>
+            <form id="sellForm">
+                <div style="padding:12px 16px;margin-bottom:18px;background:#f0f5ff;border-radius:10px;border-left:4px solid var(--primary);">
+                    <strong>🔐 Database-backed seller listing</strong>
+                    <span style="display:block;color:var(--text-muted);font-size:13px;margin-top:4px;">Login required. Your seller details, vehicle information and uploaded photos are stored in the AutoWise SQLite database.</span>
+                </div>
+                <div class="form-group"><label>Registration Number</label><input type="text" id="regNumber" placeholder="MH10AB1234" required /></div>
+                <div class="form-group"><label>Brand</label><input type="text" id="brand" placeholder="Maruti, Tata" required /></div>
+                <div class="form-group"><label>Model</label><input type="text" id="model" placeholder="Swift, Nexon" required /></div>
+                <div class="form-group"><label>Year of Purchase</label><input type="number" id="year" placeholder="2020" required /></div>
+                <div class="form-group"><label>Kilometers Driven</label><input type="number" id="km" placeholder="45000" min="0" required /></div>
+                <div class="form-group"><label>Asking Price (₹)</label><input type="number" id="price" placeholder="750000" min="10000" required /></div>
+                <div class="form-group"><label>Vehicle Type</label><select id="category"><option value="car">Car</option><option value="bike">Bike</option><option value="truck">Truck</option></select></div>
+                <div class="form-group"><label>Fuel</label><select id="fuel"><option>Petrol</option><option>Diesel</option><option>CNG</option><option>EV</option><option>Hybrid</option></select></div>
+                <div class="form-group"><label>Transmission</label><select id="trans"><option>Manual</option><option>Automatic</option></select></div>
+                <div class="form-group"><label>City</label><input type="text" id="city" placeholder="Sangli" value="Sangli" /></div>
+                <div class="form-group"><label>Full Name</label><input type="text" id="fullName" placeholder="Your full name" required /></div>
+                <div class="form-group"><label>Mobile Number</label><input type="tel" id="mobile" placeholder="9876543210" required /></div>
+                <div class="form-group"><label>Email Address</label><input type="email" id="email" placeholder="you@example.com" required /></div>
+                <div class="form-group"><label>Pickup Address</label><textarea id="address" rows="3" placeholder="Street, city, pincode" required></textarea></div>
+                <div class="form-group"><label>Upload Photos (optional)</label><input type="file" id="images" multiple accept="image/*" /></div>
+                <button type="submit" class="btn-submit"><i class="fas fa-database"></i> Publish Vehicle Listing</button>
+                
+            </form>
+        </section>
+    </div>
+
+    
+    <div class="modal-overlay" id="detailModal">...</div>
+    <footer class="footer">
+    <div class="bottom">© 2026 AutoWise. All rights reserved. Built with <i class="fas fa-heart" style="color:var(--secondary);"></i> for India.</div>
+    </footer>
+
+
+    <script src="js/data.js"></script>
+    <script src="js/images.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script src="js/sell.js"></script>
+</body>
+</html>

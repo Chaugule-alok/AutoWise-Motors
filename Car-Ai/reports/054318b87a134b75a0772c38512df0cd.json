@@ -1,0 +1,43 @@
+{
+  "vehicle": {
+    "make": "kai",
+    "model": "seltos",
+    "variant": "x3",
+    "year": 2022,
+    "km": 52000,
+    "transmission": "Automatic",
+    "fuel": "Diesel",
+    "owners": 1,
+    "services": 13,
+    "color": "White",
+    "condition": "Good",
+    "city": "Sangli",
+    "listed_price": 0.0,
+    "original_price_inr": 0.0
+  },
+  "market": {
+    "estimated_price": 0,
+    "range_low": 0,
+    "range_high": 0,
+    "reliability": 0,
+    "model_name": "Insufficient valuation data",
+    "source": "insufficient_data",
+    "damage_adjustment_pct": 0,
+    "damage_repair": 0,
+    "coverage_note": "Provide original price or train AutoWise with real Indian-market records.",
+    "explanation": []
+  },
+  "vision": {
+    "model_ready": false,
+    "message": "Damage AI is not installed yet. Upload a trained vehicle-damage model to enable verified dent/scratch detection.",
+    "findings": [],
+    "repair_estimate": 0,
+    "price_adjustment_pct": 0,
+    "frames_analyzed": 0,
+    "media_count": 5,
+    "video_uploaded": false
+  },
+  "mismatch": null,
+  "currency": "INR",
+  "note": "AI valuation is an estimate. AutoWise combines a trained model, a transparent depreciation baseline, real market comparables when supplied, and verified vision findings. It does not guarantee a sale price."
+}

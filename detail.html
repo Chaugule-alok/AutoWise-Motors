@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AutoWise – Vehicle Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        /* Additional styles for detail page */
+        .detail-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            padding: 30px;
+        }
+        .detail-gallery {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+        .detail-gallery .main-img {
+            flex: 2;
+            min-width: 300px;
+            background: #eee;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .detail-gallery .main-img img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+        .detail-gallery .thumbnails {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            min-width: 180px;
+        }
+        .detail-gallery .thumbnails img {
+            width: 100%;
+            height: 110px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+        .detail-gallery .thumbnails img:hover {
+            border-color: var(--primary);
+        }
+        .detail-gallery .thumbnails img.active {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+        .detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .detail-header h1 {
+            font-size: 32px;
+            color: var(--primary);
+        }
+        .detail-header .price-large {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        .detail-specs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            background: #f8faff;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+        .detail-specs .spec-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .detail-specs .spec-item i {
+            font-size: 20px;
+            color: var(--primary);
+            width: 30px;
+        }
+        .detail-description {
+            margin: 20px 0;
+            line-height: 1.7;
+            color: #444;
+        }
+        .detail-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0;
+        }
+        .detail-actions .btn-action {
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 16px;
+        }
+        .btn-action.buy {
+            background: var(--primary);
+            color: #fff;
+        }
+        .btn-action.buy:hover {
+            background: var(--primary-light);
+        }
+        .btn-action.sell {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+        .btn-action.sell:hover {
+            background: #ffd966;
+        }
+        .btn-action.wishlist {
+            background: #e74c3c;
+            color: #fff;
+        }
+        .btn-action.wishlist:hover {
+            background: #c0392b;
+        }
+        .btn-action.back {
+            background: #eee;
+            color: #333;
+        }
+        .btn-action.back:hover {
+            background: #ddd;
+        }
+        .detail-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 16px 0;
+        }
+        .detail-features .tag {
+            background: #eef2f7;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+        .detail-features .tag.damage {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .detail-features .tag.good {
+            background: #dcfce7;
+            color: #166534;
+        }
+        .detail-qr {
+            background: #f8faff;
+            padding: 16px 20px;
+            border-radius: 12px;
+            border: 1px dashed #b0c4de;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        .detail-qr i {
+            font-size: 36px;
+            color: var(--primary);
+        }
+        .detail-qr .qr-code {
+            font-family: monospace;
+            background: #fff;
+            padding: 4px 14px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        .detail-recommendations {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        .detail-recommendations h3 {
+            margin-bottom: 16px;
+            color: var(--primary);
+        }
+        .detail-recommendations .rec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 16px;
+        }
+        .detail-recommendations .rec-item {
+            background: #f8faff;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .detail-recommendations .rec-item:hover {
+            background: #e8edf5;
+        }
+        .detail-recommendations .explore-btn {
+            margin-top: 10px;
+            padding: 10px 16px;
+            border: 1px solid var(--primary);
+            border-radius: 999px;
+            background: #fff;
+            color: var(--primary);
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .detail-recommendations .explore-btn:hover {
+            background: var(--primary);
+            color: #fff;
+            transform: translateY(-1px);
+        }
+        .detail-recommendations .rec-item img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+        .detail-recommendations .rec-item .rec-name {
+            font-weight: 600;
+            font-size: 14px;
+            margin: 4px 0;
+        }
+        .detail-recommendations .rec-item .rec-price {
+            font-size: 14px;
+            color: var(--primary);
+            font-weight: 700;
+        }
+        /* Responsive */
+        @media (max-width: 700px) {
+            .detail-gallery .main-img img {
+                height: 250px;
+            }
+            .detail-header {
+                flex-direction: column;
+            }
+            .detail-header .price-large {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="logo"><i class="fas fa-car"></i> Auto<span>Wise</span></div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="buy.html">Buy</a>
+            <a href="sell.html">Sell</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact Us</a>
+        </nav>
+        <div class="header-actions">
+            <a href="login.html" class="btn-outline"><i class="fas fa-user"></i> Login</a>
+            <a href="wishlist.html" class="wishlist-link" title="Wishlist">
+                <i class="fas fa-heart"></i>
+                <span class="badge" id="wishlistBadge">0</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="container">
+        <div class="detail-container" id="detailContainer">
+            <!-- Content will be injected by JavaScript -->
+            <div id="detailContent">
+                <p style="text-align:center;padding:40px;">Loading vehicle details...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="inner">
+            <div><h4><i class="fas fa-car" style="color:var(--secondary);"></i> AutoWise</h4><p>Buy, sell, and value cars with AI-powered insights —<br> "damage detection, price prediction".</p></div>
+            <div><h4>Quick Links</h4><li><a href="buy.html">Browse Cars</a></li><li><a href="buy.html">Browse Bikes</a></li><li><a href="buy.html">Browse Trucks</a></li><li><a href="sell.html">Sell Your Vehicle</a></li><li><a href="wishlist.html">Wishlist</a></li></div>
+            <div><h4>Features</h4><li><a href="index.html#features">Damage Detector</a></li><li><a href="index.html#features">Future Value</a></li><li><a href="index.html#features">QR Passport</a></li><li><a href="index.html#features">Price Mismatch</a></li></div>
+        </div>
+        <div class="bottom">© 2026 AutoWise. All rights reserved. Built with <i class="fas fa-heart" style="color:var(--secondary);"></i> for India.</div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="js/data.js"></script>
+    <script src="js/images.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script>
+        window.setDetailMainImage = function(src, thumbEl) {
+            const mainImage = document.getElementById('mainImage');
+            if (mainImage) mainImage.src = src;
+            document.querySelectorAll('.detail-thumb').forEach(item => item.classList.remove('active'));
+            if (thumbEl) thumbEl.classList.add('active');
+        };
+
+        // On page load, get vehicle ID from URL
+        document.addEventListener('DOMContentLoaded', async function() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+            if (!id) {
+                document.getElementById('detailContent').innerHTML = '<p style="text-align:center;padding:40px;">No vehicle selected. <a href="buy.html">Browse vehicles</a></p>';
+                return;
+            }
+
+            const all = getAllVehicles();
+            const vehicle = all.find(v => v.id === id);
+            if (!vehicle) {
+                document.getElementById('detailContent').innerHTML = '<p style="text-align:center;padding:40px;">Vehicle not found. <a href="buy.html">Go back</a></p>';
+                return;
+            }
+
+            const container = document.getElementById('detailContent');
+            const featuredIds = ['c1', 'b1', 'c14', 'b4', 'c5', 'c17', 'b15', 'c3'];
+            const featuredSuggestions = featuredIds.filter(id => id !== vehicle.id).slice(0, 3).map(id => all.find(v => v.id === id)).filter(Boolean);
+
+            // Photos come from js/images.js so they can be swapped manually.
+            const galleryImages = getVehicleImages(vehicle);
+            const mainImage = galleryImages[0];
+            const thumbHtml = galleryImages.slice(0, 4).map((img, index) => `
+                <img src="${encodeImagePath(img)}" alt="${vehicle.brand} ${vehicle.model} view ${index + 1}" class="detail-thumb${index === 0 ? ' active' : ''}" onerror="this.style.display='none'" onclick="window.setDetailMainImage('${encodeImagePath(img)}', this)" />
+            `).join('');
+
+            const mismatchText = {
+                green: '✅ Fair Price — matches market',
+                yellow: '⚠️ Overpriced — above market average',
+                red: '🚨 Fraud Alert — price is extremely high'
+            } [vehicle.priceMismatch] || '';
+
+            const damageHtml = vehicle.damage && vehicle.damage.length ?
+                vehicle.damage.map(d => `<span class="tag damage"><i class="fas fa-exclamation-triangle"></i> ${d}</span>`).join('') :
+                `<span class="tag good"><i class="fas fa-check-circle"></i> No damage detected</span>`;
+
+            const qrId = `AW-${vehicle.id.toUpperCase()}-${String(vehicle.year).slice(-2)}`;
+
+            let recHtml = '';
+            if (featuredSuggestions.length) {
+                recHtml = `
+                    <div class="detail-recommendations">
+                        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+                            <h3 style="margin:0;"><i class="fas fa-lightbulb" style="color:var(--secondary);"></i> You might also like</h3>
+                           <a href="buy.html"><button type="button" class="explore-btn">Explore More</button></a>
+                        </div>
+                        <div class="rec-grid">
+                            ${featuredSuggestions.map(r => `
+                                <div class="rec-item" onclick="window.location.href='detail.html?id=${r.id}'">
+                                    <img ${vehicleImageAttrs(r)} alt="${r.brand} ${r.model}" />
+                                    <div class="rec-name">${r.brand} ${r.model}</div>
+                                    <div class="rec-price">${formatPrice(r.price)}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Build HTML
+            container.innerHTML = `
+                <div class="detail-gallery">
+                    <div class="main-img">
+                        <img ${vehicleImageAttrs(vehicle)} alt="${vehicle.brand} ${vehicle.model}" id="mainImage" />
+                    </div>
+                    <div class="thumbnails">
+                        ${thumbHtml}
+                    </div>
+                </div>
+
+                <div class="detail-header">
+                    <div>
+                        <h1>${vehicle.brand} ${vehicle.model}</h1>
+                        <p style="color:var(--text-muted);">${vehicle.year} · ${vehicle.city} · ${vehicle.owner} owner</p>
+                    </div>
+                    <div class="price-large">${formatPrice(vehicle.price)}</div>
+                </div>
+
+                <div class="detail-specs">
+                    <div class="spec-item"><i class="fas fa-tachometer-alt"></i> ${vehicle.km.toLocaleString()} km</div>
+                    <div class="spec-item"><i class="fas fa-gas-pump"></i> ${vehicle.fuel}</div>
+                    <div class="spec-item"><i class="fas fa-cog"></i> ${vehicle.trans}</div>
+                    <div class="spec-item"><i class="fas fa-calendar-alt"></i> ${vehicle.year}</div>
+                    <div class="spec-item"><i class="fas fa-wrench"></i> ${vehicle.services || 0} services</div>
+                    <div class="spec-item"><i class="fas fa-car-crash"></i> ${vehicle.accidents || 0} accidents</div>
+                </div>
+
+                <div class="detail-description">
+                    <p><strong>About this vehicle:</strong> This well-maintained ${vehicle.brand} ${vehicle.model} has been driven only ${vehicle.km.toLocaleString()} km. It comes with a clean service history and is ready for a new owner.</p>
+                    <p><strong>Price Status:</strong> <span style="color:${vehicle.priceMismatch === 'green' ? 'var(--green)' : vehicle.priceMismatch === 'yellow' ? 'var(--yellow)' : 'var(--red)'}">${mismatchText}</span></p>
+                </div>
+
+                <div class="detail-features">
+                    <span class="tag"><i class="fas fa-tag"></i> ${vehicle._cat.charAt(0).toUpperCase() + vehicle._cat.slice(1)}</span>
+                    ${damageHtml}
+                    <span class="tag"><i class="fas fa-star"></i> ${vehicle.priceMismatch === 'green' ? 'Excellent Deal' : vehicle.priceMismatch === 'yellow' ? 'Good Value' : 'Check Carefully'}</span>
+                </div>
+
+                <div class="detail-qr">
+                    <i class="fas fa-qrcode"></i>
+                    <div>
+                        <strong>QR Car Passport</strong>
+                        <div class="qr-code">${qrId}</div>
+                    </div>
+                    <span style="font-size:13px;color:var(--text-muted);margin-left:auto;"><i class="fas fa-scan"></i> Scan to verify</span>
+                </div>
+
+                <div class="detail-actions">
+                    <button class="btn-action buy" onclick="purchaseVehicle('${vehicle.dbId || vehicle.id}')"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+                    <button class="btn-action sell" onclick="window.location.href='sell.html'"><i class="fas fa-upload"></i> Sell Yours</button>
+                    <button class="btn-action wishlist" data-vid="${vehicle.id}" onclick="toggleDetailWishlist('${vehicle.id}')"><i class="fas fa-heart"></i> Add to Wishlist</button>
+                    <button class="btn-action back" onclick="window.history.back()"><i class="fas fa-arrow-left"></i> Go Back</button>
+                </div>
+
+                <!-- Future Value -->
+                <div style="margin: 16px 0;padding:16px;background:#f0f5ff;border-radius:10px;border-left:4px solid var(--primary);">
+                    <strong>📈 Future Value (3 years):</strong> ${formatPrice(vehicle.future3)}
+                    <span style="display:inline-block;margin-left:20px;font-size:14px;color:var(--text-muted);">(Estimated depreciation based on market trends)</span>
+                </div>
+
+                ${recHtml}
+            `;
+
+            // Update wishlist badge
+            updateWishlistBadge();
+
+            window.toggleDetailWishlist = function(id) {
+                toggleWishlistAndUpdate(id);
+                syncDetailWishlistButton(id);
+            };
+
+            function syncDetailWishlistButton(id) {
+                const btn = document.querySelector('.btn-action.wishlist');
+                if (!btn) return;
+                const inWish = isInWishlist(id);
+                btn.classList.toggle('active', inWish);
+                btn.innerHTML = inWish ?
+                    '<i class="fas fa-heart"></i> Remove from Wishlist' :
+                    '<i class="fas fa-heart"></i> Add to Wishlist';
+            }
+
+            syncDetailWishlistButton(vehicle.id);
+            addToViewHistory(vehicle.id);
+        });
+    </script>
+</body>
+</html>
